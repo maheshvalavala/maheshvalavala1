@@ -1,0 +1,68 @@
+//A C program to print preorder, inorder, and postorder traversal on Binary Tree. 
+
+#include <stdio.h> 
+#include <stdlib.h> 
+struct node 
+{ 
+    int text; 
+    struct node* left; 
+    struct node* right; 
+}; 
+struct node* newNode(int text) 
+{ 
+    struct node* node = (struct node*)malloc(sizeof(struct node)); 
+    node->text = text; 
+    node->left = NULL; 
+    node->right = NULL; 
+  
+    return(node); 
+} 
+void printPostorder(struct node* node) 
+{ 
+    if (node == NULL) 
+    return; 
+    printPostorder(node->left);
+    printPostorder(node->right); 
+  
+    printf("%d ", node->text); 
+} 
+void printInorder(struct node* node) 
+{ 
+    if (node == NULL) 
+    return; 
+    printInorder(node->left); 
+ 
+    printf("%d ", node->text);   
+ 
+    printInorder(node->right); 
+} 
+void printPreorder(struct node* node) 
+{ 
+    if (node == NULL) 
+    return; 
+  
+    printf("%d ", node->text);   
+  
+    printPreorder(node->left);   
+    printPreorder(node->right); 
+}     
+int main() 
+{ 
+    struct node *key  = newNode(1); 
+    key->left = newNode(2); 
+    key->right = newNode(3); 
+    key->left->left = newNode(4); 
+    key->left->right = newNode(5);  
+  
+    printf("\nPreorder of binary tree is \n"); 
+    printPreorder(key); 
+  
+    printf("\nInorder of binary tree is \n"); 
+    printInorder(key);   
+  
+    printf("\nPostorder of binary tree is \n"); 
+    printPostorder(key); 
+  
+    getchar(); 
+    return 0; 
+}
